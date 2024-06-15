@@ -8,6 +8,32 @@ base_url = 'https://books.toscrape.com/catalogue/category/books/historical-ficti
 catalogue_url = 'https://books.toscrape.com/catalogue/'
 page_url = 'index.html'
 
+
+
+# Nom du fichier CSV à créer
+CSV_filename = 'product_pod.csv'
+
+# Noms des en-têtes de colonnes
+fieldnames = [
+    'product_page_url',
+    'universal_product_code (upc)',
+    'title',
+    'price_including_tax',
+    'price_excluding_tax',
+    'number_available',
+    'product_description',
+    'category',
+    'review_rating',
+    'image_url'
+]
+
+
+# Créer et ouvrir le fichier CSV en mode écriture pour y ajouter les en-têtes
+with open(CSV_filename, mode='w', newline='', encoding='utf-8') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()  # Écrire les en-têtes de colonnes
+
+
 while True:
     # Construire l'URL complète de la page à scraper
     url = base_url + page_url
