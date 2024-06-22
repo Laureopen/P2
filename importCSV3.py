@@ -2,14 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import os
-import re
 
 
-# Fonction pour nettoyer les caractères spéciaux
-def clean_special_chars(text):
-    if isinstance(text, str):
-        return re.sub(r'[Â�]', '', text)
-    return text
+
 
 
 # Fonction pour scraper les détails d'un produit
@@ -83,15 +78,14 @@ fieldnames = [
 for category, category_url in category_links.items():
     page_url = 'index.html'
     csv_filename = f'{category}.csv'
+
+    with open(csv_filename, 'r', newline='') as csvfile_in:
+        reader = csv.reader(csvfile_in, delimiter=',')
     
     with open(csv_filename, mode='w', newline='', encoding='utf-8') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
         writer.writeheader()  # Écrire les en-têtes de colonnes
 
-    # Écrire les données dans le fichier CSV
-    for data in product_info:
-        cleaned_data = {key: clean_special_chars(value) for key, value in data.items()}
-        writer.writerow(cleaned_data)
 
         while True:
             # Construire l'URL complète de la page à scraper
@@ -113,8 +107,6 @@ for category, category_url in category_links.items():
             # Parcourir tous les éléments de livre trouvés pour extraire les informations
             for element in book_elements:
                 product_page_url = 'https://books.toscrape.com/catalogue/' + element.a['href'].replace("../", "")
-                # Nettoyer les caractères spéciaux dans l'URL
-                product_page_url = clean_special_chars(product_page_url)
                 print(product_page_url)
 
                 # Extraire les informations du produit
