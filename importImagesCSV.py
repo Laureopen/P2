@@ -4,6 +4,9 @@ import requests
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
+
+
+
 # Fonction  Pour télécharger  une image depuis une URL donnée
 def download_image(url, directory, filename):
     try:
