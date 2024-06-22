@@ -2,19 +2,13 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 from importCSV import scraping
-import re 
 
-# Fonction pour nettoyer les caractères spéciaux
-def clean_special_chars(text):
-    if isinstance(text, str):
-        return re.sub(r'[Â�]', '', text)
-    return text
+
 
 # URL de la catégorie de livres
 base_url = 'https://books.toscrape.com/catalogue/category/books/historical-fiction_4/'
 catalogue_url = 'https://books.toscrape.com/catalogue/'
 page_url = 'index.html'
-
 
 
 # Nom du fichier CSV à créer
@@ -61,8 +55,6 @@ while True:
     # Parcourir tous les éléments de livre trouvés pour extraire les informations
     for element in book_elements:
         product_page_url = catalogue_url + element.a['href'].replace("../", "")
-        # Nettoyer les caractères spéciaux dans l'URL
-        product_page_url = clean_special_chars(product_page_url)
         print(product_page_url)
 
         # Appel de la fonction avec son argument 
