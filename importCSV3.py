@@ -108,6 +108,8 @@ for category, category_url in category_links.items():
             # Parcourir tous les éléments de livre trouvés pour extraire les informations
             for element in book_elements:
                 product_page_url = 'https://books.toscrape.com/catalogue/' + element.a['href'].replace("../", "")
+                # Nettoyer les caractères spéciaux dans l'URL
+                product_page_url = clean_special_chars(product_page_url)
                 print(product_page_url)
 
                 # Extraire les informations du produit
