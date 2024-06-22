@@ -88,6 +88,11 @@ for category, category_url in category_links.items():
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()  # Écrire les en-têtes de colonnes
 
+    # Écrire les données dans le fichier CSV
+    for data in product_info:
+        cleaned_data = {key: clean_special_chars(value) for key, value in data.items()}
+        writer.writerow(cleaned_data)
+
         while True:
             # Construire l'URL complète de la page à scraper
             url = category_url.replace('index.html', '') + page_url
