@@ -2,6 +2,13 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 from importCSV import scraping
+import re 
+
+# Fonction pour nettoyer les caractères spéciaux
+def clean_special_chars(text):
+    if isinstance(text, str):
+        return re.sub(r'[Â�]', '', text)
+    return text
 
 # URL de la catégorie de livres
 base_url = 'https://books.toscrape.com/catalogue/category/books/historical-fiction_4/'

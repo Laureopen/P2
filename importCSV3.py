@@ -5,7 +5,6 @@ import os
 import re
 
 
-
 # Fonction pour nettoyer les caractères spéciaux
 def clean_special_chars(text):
     if isinstance(text, str):
