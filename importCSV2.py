@@ -3,11 +3,12 @@ from bs4 import BeautifulSoup
 import csv
 from importCSV import scraping
 
+
+
 # URL de la catégorie de livres
 base_url = 'https://books.toscrape.com/catalogue/category/books/historical-fiction_4/'
 catalogue_url = 'https://books.toscrape.com/catalogue/'
 page_url = 'index.html'
-
 
 
 # Nom du fichier CSV à créer
