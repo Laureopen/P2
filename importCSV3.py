@@ -4,9 +4,6 @@ import csv
 import os
 
 
-
-
-
 # Fonction pour scraper les détails d'un produit
 def scraping(product_page_url):
     response = requests.get(product_page_url)
@@ -75,17 +72,17 @@ fieldnames = [
     'image_url'
 ]
 
+# Scrapper pour chaque catégorie
 for category, category_url in category_links.items():
     page_url = 'index.html'
     csv_filename = f'{category}.csv'
 
-    with open(csv_filename, 'r', newline='') as csvfile_in:
-        reader = csv.reader(csvfile_in, delimiter=',')
+    with open(csv_filename, 'w', newline='') as csvfile_in:
+        reader = csv.reader(csvfile_in, delimiter=';')
     
     with open(csv_filename, mode='w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
         writer.writeheader()  # Écrire les en-têtes de colonnes
-
 
         while True:
             # Construire l'URL complète de la page à scraper
@@ -111,6 +108,8 @@ for category, category_url in category_links.items():
 
                 # Extraire les informations du produit
                 product_info = scraping(product_page_url)
+
+
                 
                 # Écriture des données dans le fichier CSV
                 writer.writerow(product_info)
