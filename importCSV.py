@@ -56,8 +56,8 @@ def scraping (url, CSV_filename):
     ]
 
     # Écriture des données dans le fichier CSV
-    with open(CSV_filename, mode='a', newline='', encoding='utf-8') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    with open(CSV_filename, mode='w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
         
 
         
