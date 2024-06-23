@@ -2,7 +2,7 @@
 
 Description:
 	
-Ce projet est conçu pour extraire des données de livre et les images associées depuis le site "Books to Scrape". Les données et les images sont ensuite stockées dans des dossiers organisés par catégorie.
+Ce projet est conçu pour extraire  des données de livre et les images associées depuis le site " Books to Scrape". Les données et les images  sont ensuite stokées dans des dossiers organisés par catégorie.
 
 # Prérequis
 
@@ -16,7 +16,17 @@ Ce projet est conçu pour extraire des données de livre et les images associée
 ## Etape2: Se mettre à la racine du projet
 
     cd P2
+##  Etape 3: Pour créer environnement virtuel
 
+    python -m venv P2
+   * fonctionne sous Windows, Linus et MacOS.
+### Pour activer l'environnement sous Linux et MacOs
+
+    source P2/bin/activate
+###Pour activer l'nvironnement sous windows
+			
+    P2\Scripts\activate
+    
 ## Etape 3: Installez les dépendences
 
     pip install -r requirements.txt
