@@ -39,7 +39,6 @@ Ce projet est conçu pour extraire  des données de livre et les images associé
 ## Etape 5: Lancer le script pour extraire toutes les données des produits d'une catégorie
 
     python importCSV2.py
- * Si le script  fonctionne il indique le "nombre de ligne"   
   
 
 ## Etape 6: Extraire tout les produits de toutes les catégories
