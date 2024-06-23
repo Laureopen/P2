@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 
 
-# Fonction  Pour télécharger  une image depuis une URL donnée
+# Fonction  pour télécharger  une image depuis une URL donnée
 def download_image(url, directory, filename):
     try:
         # Crée le répertoire  s"il n'existe pas
