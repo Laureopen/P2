@@ -49,6 +49,6 @@ Ce projet est conçu pour extraire  des données de livre et les images associé
 
 ## Etape 7: Extraire et enregistrer les fichiers images
 
-    python importImagescsv.py
+    python importImagesCSV.py
    * Le script enregistre l'ensemble  des images  de chaque catégories de livres et les ranges individuellement dans un dossier.
 
