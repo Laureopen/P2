@@ -41,7 +41,7 @@ Ce projet est conçu pour extraire  des données de livre et les images associé
     python importCSV2.py
   
 
-## Etape 6: Extraire tout les produits de toutes les catégories
+## Etape 6: Extraire tous les produits de toutes les catégories
 
     python importCSV3.py
    * Si le script fonctionne  il indiquera  visuellement l'ensemble  des urls et des catégories de ces livres.
