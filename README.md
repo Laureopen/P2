@@ -23,7 +23,7 @@ Ce projet est conçu pour extraire  des données de livre et les images associé
 ### Pour activer l'environnement sous Linux et MacOs
 
     source P2/bin/activate
-###Pour activer l'nvironnement sous windows
+### Pour activer l'nvironnement sous windows
 			
     P2\Scripts\activate
     
