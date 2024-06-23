@@ -2,16 +2,16 @@
 
 Description:
 	
-Ce projet est conçu pour extraire  des données de livre et les images associées depuis le site " Books to Scrape". Les données et les images  sont ensuite stokées dans des dossiers organisés par catégorie.
+Ce projet est conçu pour extraire des données de livre et les images associées depuis le site "Books to Scrape". Les données et les images sont ensuite stockées dans des dossiers organisés par catégorie.
 
 # Prérequis
 
-* Python installé sur votre machine
-* Beautifulsoup4 installé sur votre machine
+* Python 3 installé sur votre machine 
+* Virtualenv installé sur votre machine
 
 ## Etape1: Clonez le projet
 
-    git clone http:github.com/
+    git clone https://github.com/Laureopen/P2
 
 ## Etape2: Se mettre à la racine du projet
 
