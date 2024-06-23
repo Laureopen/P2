@@ -34,7 +34,7 @@ Ce projet est conçu pour extraire  des données de livre et les images associé
 ## Etape 4: Lancer  le script pour extraire les données d'un seul produit
 
     python importCSV.py
-   *Si le script à fonctionner il indiquera en invite de commande "Les données ont été écrites  dans product_info.csv" 
+   * Si le script à fonctionner il indiquera en invite de commande "Les données ont été écrites  dans product_info.csv" 
 		
 ## Etape 5: Lancer le script pour extraire toutes les données des produits d'une catégorie
 
