@@ -19,7 +19,7 @@ Ce projet est conçu pour extraire  des données de livre et les images associé
 ##  Etape 3: Pour créer environnement virtuel
 
     python -m venv P2
-   * fonctionne sous Windows, Linus et MacOS.
+   * Fonctionne sous Windows, Linus et MacOS.
 ### Pour activer l'environnement sous Linux et MacOs
 
     source P2/bin/activate
