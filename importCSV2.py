@@ -14,6 +14,7 @@ page_url = 'index.html'
 # Nom du fichier CSV à créer
 CSV_filename = 'product_pod.csv'
 
+
 # Noms des en-têtes de colonnes
 fieldnames = [
     'product_page_url',
@@ -29,9 +30,11 @@ fieldnames = [
 ]
 
 
+
+
 # Créer et ouvrir le fichier CSV en mode écriture pour y ajouter les en-têtes
 with open(CSV_filename, mode='w', newline='', encoding='utf-8') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
     writer.writeheader()  # Écrire les en-têtes de colonnes
 
 
@@ -56,6 +59,7 @@ while True:
     for element in book_elements:
         product_page_url = catalogue_url + element.a['href'].replace("../", "")
         print(product_page_url)
+
 
         # Appel de la fonction avec son argument 
         scraping(product_page_url, "product_pod.csv")
