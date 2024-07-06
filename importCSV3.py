@@ -4,6 +4,15 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
+# Dictionnaire de correspondance pour les évaluations
+review_rating_mapping = {
+    'One': '1',
+    'Two': '2',
+    'Three': '3',
+    'Four': '4',
+    'Five': '5'
+}
+
 # Fonction pour scraper les détails d'un produit
 def scraping(product_page_url):
     try:
@@ -21,7 +30,10 @@ def scraping(product_page_url):
         product_description = soup.find('meta', {'name': 'description'})['content'].strip()
         category = soup.find('ul', {'class': 'breadcrumb'}).find_all('li')[2].text.strip()
         review_rating = soup.find('p', {'class': 'star-rating'})['class'][1]
-        image_url = soup.find('img')['src'].replace('../../', 'https://books.toscrape.com/')
+        image_url = urljoin(product_page_url, soup.find('img')['src'].replace('../../', 'https://books.toscrape.com/'))
+
+        # Mapping de review_rating
+        review_rating = review_rating_mapping.get(review_rating, '0')
         
         # Stocker les infos dans un dictionnaire
         product_info = {
@@ -36,7 +48,9 @@ def scraping(product_page_url):
             'review_rating': review_rating,
             'image_url': image_url
         }
+        
         return product_info
+        
     except Exception as e:
         print(f"Erreur lors du scraping de {product_page_url}: {e}")
         return None
@@ -44,12 +58,18 @@ def scraping(product_page_url):
 # Fonction pour télécharger une image depuis une URL donnée
 def download_image(url, directory, filename):
     try:
+        # Crée le répertoire s'il n'existe pas
         os.makedirs(directory, exist_ok=True)
+        
+        # Nettoie le nom du fichier pour éviter les problèmes de système de fichiers
+        filename = "".join([c if c.isalnum() or c in "._-" else "_" for c in filename])
+
         response = requests.get(url, timeout=10)
         response.raise_for_status()
+
         with open(os.path.join(directory, filename), 'wb') as f:
             f.write(response.content)
-        print(f"Image {filename} téléchargée avec succès.")
+        print(f"Image {filename} téléchargée avec succès depuis {url}.")
     except Exception as e:
         print(f"Erreur lors du téléchargement de l'image {filename} depuis {url}: {e}")
 
@@ -67,25 +87,6 @@ for category in categories:
     category_name = category.get_text().strip()
     category_url = urljoin(homepage_url, category['href'])
     category_links[category_name] = category_url
-
-# Afficher les catégories et leurs liens
-for category, link in category_links.items():
-    print(f'{category}: {link}')
-
-# Noms des en-têtes de colonnes
-fieldnames = [
-    'product_page_url',
-    'universal_product_code (upc)',
-    'title',
-    'price_including_tax',
-    'price_excluding_tax',
-    'number_available',
-    'product_description',
-    'category',
-    'review_rating',
-    'image_url',
-    'image_filename'
-]
 
 # Créer un dossier principal 'images' pour les images
 images_folder = os.path.join(os.getcwd(), 'images')
@@ -106,7 +107,19 @@ for category, category_url in category_links.items():
     csv_filename = os.path.join(category_csv_folder, f'{category}.csv')
 
     with open(csv_filename, mode='w', newline='', encoding='utf-8') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
+        writer = csv.DictWriter(csvfile, fieldnames=[
+            'product_page_url',
+            'universal_product_code (upc)',
+            'title',
+            'price_including_tax',
+            'price_excluding_tax',
+            'number_available',
+            'product_description',
+            'category',
+            'review_rating',
+            'image_url',
+            'image_filename'
+        ], delimiter=';')
         writer.writeheader()  # Écrire les en-têtes de colonnes
 
         bpage = True
@@ -127,7 +140,7 @@ for category, category_url in category_links.items():
 
             # Trouver tous les éléments de livres sur la page
             book_elements = soup.find_all(class_='product_pod')
-
+        
             # Parcourir tous les éléments de livre trouvés pour extraire les informations
             for element in book_elements:
                 product_page_url = urljoin('https://books.toscrape.com/catalogue/', element.a['href'].replace("../", ""))
@@ -139,14 +152,14 @@ for category, category_url in category_links.items():
                 # Télécharger l'image du produit
                 if product_info:
                     image_url = product_info['image_url']
-                    filename = f"{product_info['universal_product_code (upc)']}.jpg"
+                    filename = f"{product_info['title']}.jpg"
                     directory = os.path.join(images_folder, category)
                     download_image(image_url, directory, filename)
                     product_info['image_filename'] = filename
 
-                    # Écriture des données dans le fichier CSV
+                    # Écriture des données dans le fichier CSV de la catégorie
                     writer.writerow(product_info)
-
+                    
             # Vérifier la présence d'un lien "next" pour la pagination
             next_button = soup.find(class_='next')
             if next_button:
