@@ -23,7 +23,7 @@ Ce projet est conçu pour extraire  des données de livre et les images associé
 			
     Projet2\Scripts\activate
     
-## Etape 3: Installez les dépendences
+## Etape 3: Installez les dépendances
 
     pip install -r requirements.txt
 
