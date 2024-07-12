@@ -30,6 +30,7 @@ Ce projet est conçu pour extraire  des données de livre et les images associé
 ## Etape 4: Extraire tout les produits de toutes les catégories
 
     python importCSV3.py
-   * Si le script fonctionne  il va créer un fichier csv_files et un fichier images. Ces deux fichiers représentent l’extraction de l’ensemble des livres des différentes catégories et des images associés à ces catégories.
+   * Si le script fonctionne  il va créer un dossier csv_files et un dossier images. Ces deux dossiers représentent l’extraction de l’ensemble des livres des différentes catégories et des images associés à ces catégories. Lorsque le script s'arrête il va écrire  ('Scraping terminé.').
+     
 
 
